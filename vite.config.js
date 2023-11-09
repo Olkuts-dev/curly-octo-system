@@ -5,4 +5,11 @@ module.exports = {
   build: {
     minify: false,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/assets/scss/index";`,
+      },
+    },
+  },
 };
