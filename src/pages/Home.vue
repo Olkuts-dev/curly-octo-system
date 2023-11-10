@@ -1,13 +1,17 @@
+
+<script setup lang="ts">
+import Search from '../components/Search.vue'
+import test from '../components/test.vue'
+</script>
+
 <template>
-  <div class="card">
-    <div class="card-content">
-      <p>Home</p>
-    </div>
+  <div>
+    <Search>
+
+    </Search>
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
 <style lang="scss" scoped>
 .card {
   padding: 5px;

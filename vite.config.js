@@ -1,10 +1,11 @@
-const vuePlugin = require('@vitejs/plugin-vue')
+import { fileURLToPath, URL } from "url";
 
-module.exports = {
-  plugins: [vuePlugin()],
-  build: {
-    minify: false,
-  },
+import vue from "@vitejs/plugin-vue";
+
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [vue()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -12,4 +13,9 @@ module.exports = {
       },
     },
   },
-};
+  resolve: {
+    alias: {
+      "@src": fileURLToPath(new URL("./src", import.meta.url)),
+    }
+  }
+});
