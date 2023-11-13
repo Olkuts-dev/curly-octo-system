@@ -1,6 +1,17 @@
 
-  * {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+* {
+  font-family: 'Roboto', sans-serif;;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  outline: none;
+}
+#app {
+  --background: #f0dbf9;
+  --primary-text: rgb(86 34 78);
+}
+p {
+  margin: 0;
+}
+

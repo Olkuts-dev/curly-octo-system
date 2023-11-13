@@ -1,23 +1,21 @@
 
 <script setup lang="ts">
-import Search from '../components/Search.vue'
-import test from '../components/test.vue'
+import TheSearch from '../components/TheSearch.vue';
 </script>
 
 <template>
-  <div>
-    <Search>
-
-    </Search>
+  <div class="home-page">
+    <TheSearch />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.card {
-  padding: 5px;
-  background-color: whitesmoke;
-  .card-content {
-    background-color: white;
-  }
+.home-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
 }
 </style>
