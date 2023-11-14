@@ -9,6 +9,7 @@ export const useSearchStore = defineStore('search', () => {
 
   const search = async (value: string) => {
     searchResult.value = null;
+
     searchResult.value = await searchApi.search(value);
   };
 

@@ -1,11 +1,11 @@
-import fs from 'fs'
-import path from 'path'
-import express from 'express'
-import { createServer } from 'vite'
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
+import { createServer } from 'vite';
 
-const resolve = (p) => path.resolve(p)
+const resolve = (p) => path.resolve(p);
 
-const app = express()
+const app = express();
 
 const vite = await createServer({
   root: resolve('.'),
@@ -14,15 +14,12 @@ const vite = await createServer({
   server: {
     middlewareMode: true,
     watch: {
-      // During tests we edit the files too fast and sometimes chokidar
-      // misses change events, so enforce polling for consistency
       usePolling: true,
       interval: 100,
     },
   },
-})
+});
 
-// use vite's connect instance as middleware
 app.use(vite.middlewares);
 
 app.use('*', async (req, res) => {
@@ -47,4 +44,4 @@ app.use('*', async (req, res) => {
 
 app.listen(8080, () => {
   console.log('http://localhost:8080');
-})
+});

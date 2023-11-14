@@ -2,7 +2,6 @@
   import { ref } from 'vue';
   import CustomInput from '@src/components/CustomInput.vue';
   import { useSearchStore } from '@src/store/search.store';
-  import ResultCard from '@src/components/ResultCard.vue';
 
   const searchStore = useSearchStore();
   const searchValue = ref<string>('');
@@ -24,23 +23,6 @@
     :delay="100"
     @update:model-value="search"
   />
-  <div
-    v-if="searchStore.searchResult === null"
-    class="loader"
-  />
-  <div class="nothing" v-else-if="!searchStore.searchResult.length">
-    Nothing... Try again
-  </div>
-  <div
-    v-else
-    class="cards"
-  >
-    <ResultCard 
-      v-for="item in searchStore.searchResult"
-      :key="item.place_id"
-      v-bind="item"
-    />
-  </div>
 </template>
 
 <style lang="scss" scoped>
