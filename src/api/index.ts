@@ -1,1 +1,1 @@
-export { default as SearchApi } from './modules/search.api'
+export { default as SearchApi } from './modules/search.api';

@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { SearchApi } from '@src/api/index';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   modelValue: string;
-  delay: number;
+  delay?: number;
   placeholder: string;
 }>();
 
@@ -12,7 +11,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const timeout = ref<NodeJS.Timeout>();
 
-const onInput = (e) => {
+const onInput = (e: any) => {
   const { value } = e.target.value;
 
   if (props.delay) {
@@ -20,7 +19,7 @@ const onInput = (e) => {
 
     timeout.value = setTimeout(() => {
       emit('update:modelValue', e.target.value);
-    }, props.delay ?? 0);
+    }, props.delay);
 
     return;
   }

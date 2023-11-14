@@ -1,15 +1,18 @@
 <script lang="ts" setup>
-  import { SearchApi } from '@src/api/index';
-  import { onMounted, ref } from 'vue';
-  import CustomInput from './CustomInput.vue';
+  import { ref } from 'vue';
+  import CustomInput from '@src/components/CustomInput.vue';
   import { useSearchStore } from '@src/store/search.store';
-import ResultCard from './ResultCard.vue';
+  import ResultCard from '@src/components/ResultCard.vue';
 
   const searchStore = useSearchStore();
   const searchValue = ref<string>('');
 
-  const search = async () => {
-    searchStore.search(searchValue.value);
+  const search = async (): Promise<void> => {
+    if (!searchValue.value.trim().length) {
+      return;
+    }
+
+    await searchStore.search(searchValue.value.trim());
   };
   
 </script>
@@ -17,20 +20,26 @@ import ResultCard from './ResultCard.vue';
 <template>
   <CustomInput
     v-model="searchValue"
-    :delay="200"
     placeholder="Поиск... "
+    :delay="100"
     @update:model-value="search"
   />
-  <div v-if="searchStore.searchResult === null" class="loader">
-
+  <div
+    v-if="searchStore.searchResult === null"
+    class="loader"
+  />
+  <div class="nothing" v-else-if="!searchStore.searchResult.length">
+    Nothing... Try again
   </div>
-  <div class="cards" v-else>
-    <template
+  <div
+    v-else
+    class="cards"
+  >
+    <ResultCard 
       v-for="item in searchStore.searchResult"
       :key="item.place_id"
-    >
-      <ResultCard v-bind="item" />
-    </template>
+      v-bind="item"
+    />
   </div>
 </template>
 
@@ -47,12 +56,21 @@ import ResultCard from './ResultCard.vue';
   margin-right: -20px;
 }
 
+.nothing {
+  font-size: 18px;
+  color: var(--primary-text);
+  opacity: 0.5;
+  margin-top: 20px;
+  height: 50px;
+}
+
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 5px solid white;
+  border-top: 5px solid var(--primary);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
   animation: spin 2s linear infinite;
 
   @keyframes spin {

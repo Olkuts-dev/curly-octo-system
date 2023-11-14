@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import TheSearch from '../components/TheSearch.vue';
+import TheSearch from '@src/components/TheSearch.vue';
 </script>
 
 <template>

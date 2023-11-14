@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { SearchResult } from '@src/types/search.dto';
-import { computed } from 'vue';
+  import { SearchResult } from '@src/types/search.dto';
 
   const props = defineProps<SearchResult>();
 </script>
@@ -8,24 +7,28 @@ import { computed } from 'vue';
 <template>
   <div class="card">
     <p class="id">
-      #{{ props.place_id }}
-    </p>
-    <p class="name">
-      <span>{{ props.display_name }}</span>
+      <span>#{{ props.place_id }}</span>
       <span class="type">{{ props.type }}</span>
     </p>
-    <p class="coords">
-      {{ props.lat }}, {{ props.lon }}
+
+    <p class="name">
+      <span>{{ props.display_name }}</span>
     </p>
+
+    <div class="licence">
+      <span>{{ props.licence }}</span>
+      <a
+        class="link"
+        target="_blank"
+        :href="`https://nominatim.openstreetmap.org/ui/details.html?osmtype=${osm_type?.substring(0, 1).toUpperCase()}&osmid=${osm_id}&class=${category}`"
+      >
+        Details
+      </a>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.id {
-  font-size: 14px;
-  opacity: 0.5;
-  margin-bottom: 10px;
-}
 .card {
   border-radius: 10px;
   background-color: white;
@@ -33,15 +36,13 @@ import { computed } from 'vue';
   width: 80vw;
   max-width: 600px;
 
-  .name {
-    color: var(--primary-text);
-    width: 100%;
-    font-size: 20px;
-    font-weight: 500;
+  .id {
+    font-size: 14px;
+    opacity: 0.5;
     display: inline-flex;
     align-items: center;
     margin-bottom: 10px;
-
+    width: 100%;
     .type {
       margin-left: auto;
       color: var(--primary-text);
@@ -51,7 +52,37 @@ import { computed } from 'vue';
       text-transform: capitalize;
     }
   }
-  .coords {
+  .name {
+    color: var(--primary-text);
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .licence {
+    display: inline-flex;
+    align-items: end;
+    margin-top: 10px;
+    font-size: 12px;
+    width: 100%;
+
+    .link {
+      margin-left: auto;
+      background-color: var(--primary);
+      border: none;
+      font-size: 16px;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 12px 18px;
+      transition: opacity .2s;
+
+      &:hover {
+        opacity: 0.8
+        // background-color: var(--primary-text);
+      }
+    }
   }
 }
 </style>
