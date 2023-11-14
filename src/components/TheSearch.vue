@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import CustomInput from '@src/components/CustomInput.vue';
+  import CustomInput from '@src/components/DelayedInput.vue';
   import { useSearchStore } from '@src/store/search.store';
 
   const searchStore = useSearchStore();
